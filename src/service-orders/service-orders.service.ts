@@ -1,8 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import {
-  CreateServiceOrderDto,
-  FindOneParams,
-} from './dto/create-service-order.dto';
+import { CreateServiceOrderDto } from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 // Import the functions you need from the SDKs you need
 import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
@@ -70,17 +67,20 @@ export class ServiceOrdersService {
   }
 
   async update(id: string, so: UpdateServiceOrderDto) {
-    const res = await this.docRef.doc(id).get();
-    console.log(res.data());
-    if (!res.data()) {
-      console.log('No matching documents.');
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    try {
+      const res = await this.docRef.doc(id).update({
+        ...so,
+        lastUpdatedTime: FieldValue.serverTimestamp(),
+      });
+      return res;
+    } catch (error) {
+      console.log(error);
+      if (error.code == 5) {
+        throw new HttpException('Service Order Not Found', HttpStatus.NOT_FOUND);
+      }
+      throw new HttpException(`Error Updating Service Order. Details: ${error.details}`,
+        HttpStatus.BAD_REQUEST);
     }
-    // .update({
-    //   ...so,
-    //   lastUpdatedTime: FieldValue.serverTimestamp(),
-    // });
-    return res.data();
   }
 
   async remove(id: string) {

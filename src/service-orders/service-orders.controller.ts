@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ServiceOrdersService } from './service-orders.service';
-import { CreateServiceOrderDto, FindOneParams } from './dto/create-service-order.dto';
+import { CreateServiceOrderDto } from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 
 @Controller('service-orders')

@@ -41,13 +41,17 @@ let ServiceOrdersService = class ServiceOrdersService {
         return res.data();
     }
     async update(id, so) {
-        const res = await this.docRef.doc(id).get();
-        console.log(res.data());
-        if (!res.data()) {
-            console.log('No matching documents.');
-            throw new common_1.HttpException('Not Found', common_1.HttpStatus.NOT_FOUND);
+        try {
+            const res = await this.docRef.doc(id).update(Object.assign(Object.assign({}, so), { lastUpdatedTime: firestore_1.FieldValue.serverTimestamp() }));
+            return res;
         }
-        return res.data();
+        catch (error) {
+            console.log(error);
+            if (error.code == 5) {
+                throw new common_1.HttpException('Service Order Not Found', common_1.HttpStatus.NOT_FOUND);
+            }
+            throw new common_1.HttpException(`Error Updating Service Order. Details: ${error.details}`, common_1.HttpStatus.BAD_REQUEST);
+        }
     }
     async remove(id) {
         console.log(id);

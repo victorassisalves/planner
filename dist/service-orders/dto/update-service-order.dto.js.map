@@ -1,1 +1,1 @@
-{"version":3,"file":"update-service-order.dto.js","sourceRoot":"","sources":["../../../src/service-orders/dto/update-service-order.dto.ts"],"names":[],"mappings":";;;AAAA,uDAAmD;AACnD,yEAAmE;AAEnE,MAAa,qBAAsB,SAAQ,IAAA,0BAAW,EAAC,gDAAqB,CAAC;CAAG;AAAhF,sDAAgF"}
+{"version":3,"file":"update-service-order.dto.js","sourceRoot":"","sources":["../../../src/service-orders/dto/update-service-order.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,uDAAmD;AACnD,qDAA0C;AAC1C,yEAAmE;AAEnE,MAAa,qBAAsB,SAAQ,IAAA,0BAAW,EAAC,gDAAqB,CAAC;CAG5E;AAFC;IAAC,IAAA,yBAAO,GAAE;;wDACQ;AAFpB,sDAGC"}

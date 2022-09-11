@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServiceOrdersController } from './service-orders/service-orders.controller';
 import { TeamsModule } from './teams/teams.module';
@@ -8,7 +7,7 @@ import { ServiceOrdersService } from './service-orders/service-orders.service';
 
 @Module({
   imports: [TeamsModule, ServiceOrdersModule],
-  controllers: [AppController, ServiceOrdersController],
+  controllers: [ServiceOrdersController],
   providers: [AppService, ServiceOrdersService],
 })
 export class AppModule { }

@@ -9,23 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindOneParams = exports.CreateServiceOrderDto = void 0;
+exports.CreateServiceOrderDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateServiceOrderDto {
-    constructor(id, name, price, service, leader) {
-        this.id = id;
-        this.leader = leader;
-        this.name = name;
-        this.price = price;
-        this.service = service;
-    }
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateServiceOrderDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateServiceOrderDto.prototype, "serviceId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateServiceOrderDto.prototype, "serviceOrderId", void 0);
+__decorate([
+    (0, class_validator_1.IsNumberString)(),
+    __metadata("design:type", Number)
+], CreateServiceOrderDto.prototype, "year", void 0);
+__decorate([
+    (0, class_validator_1.IsDate)(),
+    __metadata("design:type", Date)
+], CreateServiceOrderDto.prototype, "billingDate", void 0);
 exports.CreateServiceOrderDto = CreateServiceOrderDto;
-class FindOneParams {
-}
-exports.FindOneParams = FindOneParams;
 //# sourceMappingURL=create-service-order.dto.js.map

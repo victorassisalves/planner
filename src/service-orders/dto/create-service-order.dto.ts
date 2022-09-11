@@ -1,22 +1,31 @@
-import { IsNotEmpty, IsNumberString, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumberString, IsString } from 'class-validator';
 
 export class CreateServiceOrderDto {
-  id: string;
   @IsNotEmpty()
   name: string;
+  account: string;
   price: number;
-  service: string;
   leader: string;
+  @IsNotEmpty()
+  serviceId: string;
+  serviceName: string;
+  @IsNotEmpty()
+  serviceOrderId: string;
+  @IsNumberString()
+  year: number;
+  @IsDate()
+  billingDate: Date;
+  status: string;
+  milestone: string;
+  responsibleTeam: {
+    teamId: string;
+    teamMembers: [
 
-  constructor(id: string, name: string, price: number, service: string, leader: string) {
-    this.id = id;
-    this.leader = leader;
-    this.name = name;
-    this.price = price;
-    this.service = service;
+    ]
   }
-}
+  billingOrders?: [
+    {
 
-export class FindOneParams {
-  id: string;
+    }
+  ]
 }

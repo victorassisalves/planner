@@ -1,11 +1,21 @@
 export declare class CreateServiceOrderDto {
-    id: string;
     name: string;
+    account: string;
     price: number;
-    service: string;
     leader: string;
-    constructor(id: string, name: string, price: number, service: string, leader: string);
-}
-export declare class FindOneParams {
-    id: string;
+    serviceId: string;
+    serviceName: string;
+    serviceOrderId: string;
+    year: number;
+    billingDate: Date;
+    status: string;
+    milestone: string;
+    responsibleTeam: {
+        teamId: string;
+        teamMembers: [
+        ];
+    };
+    billingOrders?: [
+        {}
+    ];
 }
