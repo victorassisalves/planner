@@ -5,11 +5,11 @@ import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 
 @Controller('service-orders')
 export class ServiceOrdersController {
-  constructor(private readonly serviceOrdersService: ServiceOrdersService) {}
+  constructor(private readonly serviceOrdersService: ServiceOrdersService) { }
 
   @Post()
-  create(@Body() createServiceOrderDto: CreateServiceOrderDto) {
-    return this.serviceOrdersService.create(createServiceOrderDto);
+  create(@Body() so: CreateServiceOrderDto) {
+    return this.serviceOrdersService.create(so);
   }
 
   @Get()

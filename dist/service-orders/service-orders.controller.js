@@ -14,63 +14,67 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceOrdersController = void 0;
 const common_1 = require("@nestjs/common");
-const service_orders_dto_1 = require("./service-orders.dto");
+const service_orders_service_1 = require("./service-orders.service");
+const create_service_order_dto_1 = require("./dto/create-service-order.dto");
+const update_service_order_dto_1 = require("./dto/update-service-order.dto");
 let ServiceOrdersController = class ServiceOrdersController {
-    getAll() {
-        return `All service orders!`;
-    }
-    getOne(id) {
-        return `Just got the service order with ID: ${id}.`;
+    constructor(serviceOrdersService) {
+        this.serviceOrdersService = serviceOrdersService;
     }
     create(so) {
-        console.log(so);
-        return `Service Order Created!`;
+        return this.serviceOrdersService.create(so);
     }
-    update(id, so) {
-        console.log(so);
-        return `Service Order #${id} Updated!`;
+    findAll() {
+        return this.serviceOrdersService.findAll();
     }
-    delete(so) {
-        return `Service Order ID:${so.id} Deleted!`;
+    findOne(id) {
+        return this.serviceOrdersService.findOne(+id);
+    }
+    update(id, updateServiceOrderDto) {
+        return this.serviceOrdersService.update(+id, updateServiceOrderDto);
+    }
+    remove(id) {
+        return this.serviceOrdersService.remove(+id);
     }
 };
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], ServiceOrdersController.prototype, "getAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)(`id`)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", String)
-], ServiceOrdersController.prototype, "getOne", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [service_orders_dto_1.CreateSODTO]),
-    __metadata("design:returntype", String)
+    __metadata("design:paramtypes", [create_service_order_dto_1.CreateServiceOrderDto]),
+    __metadata("design:returntype", void 0)
 ], ServiceOrdersController.prototype, "create", null);
 __decorate([
-    (0, common_1.Put)(`:id`),
-    __param(0, (0, common_1.Param)(`id`)),
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ServiceOrdersController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ServiceOrdersController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, service_orders_dto_1.CreateSODTO]),
-    __metadata("design:returntype", String)
+    __metadata("design:paramtypes", [String, update_service_order_dto_1.UpdateServiceOrderDto]),
+    __metadata("design:returntype", void 0)
 ], ServiceOrdersController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)()),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", String)
-], ServiceOrdersController.prototype, "delete", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ServiceOrdersController.prototype, "remove", null);
 ServiceOrdersController = __decorate([
-    (0, common_1.Controller)('service-orders')
+    (0, common_1.Controller)('service-orders'),
+    __metadata("design:paramtypes", [service_orders_service_1.ServiceOrdersService])
 ], ServiceOrdersController);
 exports.ServiceOrdersController = ServiceOrdersController;
 //# sourceMappingURL=service-orders.controller.js.map

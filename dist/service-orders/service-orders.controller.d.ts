@@ -1,8 +1,12 @@
-import { CreateSODTO } from './service-orders.dto';
+import { ServiceOrdersService } from './service-orders.service';
+import { CreateServiceOrderDto } from './dto/create-service-order.dto';
+import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 export declare class ServiceOrdersController {
-    getAll(): string;
-    getOne(id: any): string;
-    create(so: CreateSODTO): string;
-    update(id: string, so: CreateSODTO): string;
-    delete(so: any): string;
+    private readonly serviceOrdersService;
+    constructor(serviceOrdersService: ServiceOrdersService);
+    create(so: CreateServiceOrderDto): string;
+    findAll(): CreateServiceOrderDto[];
+    findOne(id: string): CreateServiceOrderDto;
+    update(id: string, updateServiceOrderDto: UpdateServiceOrderDto): string;
+    remove(id: string): string;
 }
