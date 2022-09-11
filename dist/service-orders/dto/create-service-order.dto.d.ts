@@ -1,8 +1,11 @@
 export declare class CreateServiceOrderDto {
-    id: number;
+    id: string;
     name: string;
     price: number;
     service: string;
     leader: string;
-    constructor(id: number, name: string, price: number, service: string, leader: string);
+    constructor(id: string, name: string, price: number, service: string, leader: string);
+}
+export declare class FindOneParams {
+    id: string;
 }

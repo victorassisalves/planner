@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ServiceOrdersService } from './service-orders.service';
-import { CreateServiceOrderDto } from './dto/create-service-order.dto';
+import { CreateServiceOrderDto, FindOneParams } from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 
 @Controller('service-orders')
@@ -19,16 +19,16 @@ export class ServiceOrdersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.serviceOrdersService.findOne(+id);
+    return this.serviceOrdersService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceOrderDto: UpdateServiceOrderDto) {
-    return this.serviceOrdersService.update(+id, updateServiceOrderDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() so: UpdateServiceOrderDto) {
+    return this.serviceOrdersService.update(id, so);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.serviceOrdersService.remove(+id);
+    return this.serviceOrdersService.remove(id);
   }
 }

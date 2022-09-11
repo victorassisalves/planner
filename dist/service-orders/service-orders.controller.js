@@ -28,13 +28,13 @@ let ServiceOrdersController = class ServiceOrdersController {
         return this.serviceOrdersService.findAll();
     }
     findOne(id) {
-        return this.serviceOrdersService.findOne(+id);
+        return this.serviceOrdersService.findOne(id);
     }
-    update(id, updateServiceOrderDto) {
-        return this.serviceOrdersService.update(+id, updateServiceOrderDto);
+    update(id, so) {
+        return this.serviceOrdersService.update(id, so);
     }
     remove(id) {
-        return this.serviceOrdersService.remove(+id);
+        return this.serviceOrdersService.remove(id);
     }
 };
 __decorate([
@@ -58,7 +58,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ServiceOrdersController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

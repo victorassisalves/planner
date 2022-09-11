@@ -8,43 +8,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceOrdersService = void 0;
 const common_1 = require("@nestjs/common");
-const create_service_order_dto_1 = require("./dto/create-service-order.dto");
+const app_1 = require("firebase-admin/app");
+const firestore_1 = require("firebase-admin/firestore");
+const serviceAccount = require('../../firebase-auth.json');
+(0, app_1.initializeApp)({ credential: (0, app_1.cert)(serviceAccount) });
+const db = (0, firestore_1.getFirestore)();
 let ServiceOrdersService = class ServiceOrdersService {
     constructor() {
-        this.serviceOrder = [
-            new create_service_order_dto_1.CreateServiceOrderDto(100, 'Inventora Digital TR', 199.09, 'Tax Return', 'Victor Assis'),
-            new create_service_order_dto_1.CreateServiceOrderDto(101, 'Inventora Digital BF', 799.09, 'Business Formation', 'Victor Assis'),
-        ];
+        this.docRef = db.collection('serviceOrders');
     }
-    create(so) {
-        console.log(so);
-        const index = this.serviceOrder.findIndex((service) => so.id == service.id);
-        console.log(index);
-        if (index > 0) {
-            throw new common_1.HttpException('ID already Exists', common_1.HttpStatus.CONFLICT);
-        }
-        this.serviceOrder.push(so);
-        return 'This action adds a new serviceOrder';
+    async create(so) {
+        const newSo = this.docRef.doc();
+        await this.docRef.add(Object.assign(Object.assign({}, so), { id: newSo.id, createdTime: firestore_1.FieldValue.serverTimestamp() }));
+        return Object.assign(Object.assign({}, so), { id: newSo.id });
     }
-    findAll() {
-        return this.serviceOrder;
+    async findAll() {
+        const first = this.docRef.orderBy('leader', 'desc').limit(10);
+        const snapshot = await first.get();
+        const soList = [];
+        snapshot.forEach(so => {
+            soList.push(so.data());
+        });
+        return soList;
     }
-    findOne(id) {
-        const index = this.serviceOrder.findIndex((so) => so.id == id);
-        return this.serviceOrder[index];
-    }
-    update(id, so) {
-        const index = this.serviceOrder.findIndex((so) => so.id == id);
-        return `This action updates a #${id} serviceOrder`;
-    }
-    remove(id) {
-        const index = this.serviceOrder.findIndex((so) => so.id == id);
-        console.log(index);
-        if (index == -1) {
+    async findOne(id) {
+        const res = await this.docRef.doc(id).get();
+        console.log(res.data());
+        if (!res.data()) {
+            console.log('No matching documents.');
             throw new common_1.HttpException('Not Found', common_1.HttpStatus.NOT_FOUND);
         }
-        this.serviceOrder.splice(index, 1);
-        return `This action removes a #${id} serviceOrder`;
+        return res.data();
+    }
+    async update(id, so) {
+        const res = await this.docRef.doc(id).get();
+        console.log(res.data());
+        if (!res.data()) {
+            console.log('No matching documents.');
+            throw new common_1.HttpException('Not Found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return res.data();
+    }
+    async remove(id) {
+        console.log(id);
+        const res = await this.docRef.doc(id).delete();
+        console.log(res);
+        return res;
     }
 };
 ServiceOrdersService = __decorate([
