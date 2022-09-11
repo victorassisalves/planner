@@ -18,6 +18,11 @@ let ServiceOrdersService = class ServiceOrdersService {
     }
     create(so) {
         console.log(so);
+        const index = this.serviceOrder.findIndex((service) => so.id == service.id);
+        console.log(index);
+        if (index > 0) {
+            throw new common_1.HttpException('ID already Exists', common_1.HttpStatus.CONFLICT);
+        }
         this.serviceOrder.push(so);
         return 'This action adds a new serviceOrder';
     }

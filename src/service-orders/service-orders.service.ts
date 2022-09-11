@@ -22,6 +22,11 @@ export class ServiceOrdersService {
   ];
   create(so: CreateServiceOrderDto) {
     console.log(so);
+    const index = this.serviceOrder.findIndex((service) => so.id == service.id);
+    console.log(index);
+    if (index > 0) {
+      throw new HttpException('ID already Exists', HttpStatus.CONFLICT);
+    }
     this.serviceOrder.push(so);
     return 'This action adds a new serviceOrder';
   }
