@@ -1,3 +1,4 @@
+/// <reference types="@google-cloud/firestore" />
 import { CreateServiceOrderDto } from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 export declare class ServiceOrdersService {

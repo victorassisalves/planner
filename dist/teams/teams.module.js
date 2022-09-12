@@ -10,12 +10,13 @@ exports.TeamsModule = void 0;
 const common_1 = require("@nestjs/common");
 const teams_service_1 = require("./teams.service");
 const teams_controller_1 = require("./teams.controller");
+const create_team_dto_1 = require("./dto/create-team.dto");
 let TeamsModule = class TeamsModule {
 };
 TeamsModule = __decorate([
     (0, common_1.Module)({
         controllers: [teams_controller_1.TeamsController],
-        providers: [teams_service_1.TeamsService]
+        providers: [teams_service_1.TeamsService, create_team_dto_1.IsTeamUniqueConstraint]
     })
 ], TeamsModule);
 exports.TeamsModule = TeamsModule;

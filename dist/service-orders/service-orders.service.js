@@ -7,15 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceOrdersService = void 0;
+const firestore_1 = require("@google-cloud/firestore");
 const common_1 = require("@nestjs/common");
-const app_1 = require("firebase-admin/app");
-const firestore_1 = require("firebase-admin/firestore");
-const serviceAccount = require('../../firebase-auth.json');
-(0, app_1.initializeApp)({ credential: (0, app_1.cert)(serviceAccount) });
-const db = (0, firestore_1.getFirestore)();
+const main_1 = require("../main");
 let ServiceOrdersService = class ServiceOrdersService {
     constructor() {
-        this.docRef = db.collection('serviceOrders');
+        this.docRef = main_1.db.collection('serviceOrders');
     }
     async create(so) {
         const newSo = this.docRef.doc();

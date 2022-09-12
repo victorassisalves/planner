@@ -1,16 +1,10 @@
+import { FieldValue } from '@google-cloud/firestore';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { db } from 'src/main';
 import { CreateServiceOrderDto } from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 // Import the functions you need from the SDKs you need
-import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
-import { getFirestore, Timestamp, FieldValue } from 'firebase-admin/firestore';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const serviceAccount = require('../../firebase-auth.json');
 
-// Initialize Firebase
-initializeApp({ credential: cert(serviceAccount) });
-
-const db = getFirestore();
 
 @Injectable()
 export class ServiceOrdersService {

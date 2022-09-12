@@ -27,8 +27,8 @@ let TeamsController = class TeamsController {
     findAll() {
         return this.teamsService.findAll();
     }
-    findOne(id) {
-        return this.teamsService.findOne(+id);
+    findOne(teamName) {
+        return this.teamsService.findOne(teamName);
     }
     update(id, updateTeamDto) {
         return this.teamsService.update(+id, updateTeamDto);
@@ -51,8 +51,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TeamsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(':teamName'),
+    __param(0, (0, common_1.Param)('teamName')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

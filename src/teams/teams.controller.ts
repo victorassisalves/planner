@@ -5,7 +5,7 @@ import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Controller('teams')
 export class TeamsController {
-  constructor(private readonly teamsService: TeamsService) {}
+  constructor(private readonly teamsService: TeamsService) { }
 
   @Post()
   create(@Body() createTeamDto: CreateTeamDto) {
@@ -17,9 +17,9 @@ export class TeamsController {
     return this.teamsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.teamsService.findOne(+id);
+  @Get(':teamName')
+  findOne(@Param('teamName') teamName: string) {
+    return this.teamsService.findOne(teamName);
   }
 
   @Patch(':id')
