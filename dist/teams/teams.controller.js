@@ -30,11 +30,11 @@ let TeamsController = class TeamsController {
     findOne(teamName) {
         return this.teamsService.findOne(teamName);
     }
-    update(id, updateTeamDto) {
-        return this.teamsService.update(+id, updateTeamDto);
+    update(teamName, updateTeamDto) {
+        return this.teamsService.update(teamName, updateTeamDto);
     }
-    remove(id) {
-        return this.teamsService.remove(+id);
+    remove(teamName) {
+        return this.teamsService.remove(teamName);
     }
 };
 __decorate([
@@ -58,16 +58,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TeamsController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(':teamName'),
+    __param(0, (0, common_1.Param)('teamName')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_team_dto_1.UpdateTeamDto]),
     __metadata("design:returntype", void 0)
 ], TeamsController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':teamName'),
+    __param(0, (0, common_1.Param)('teamName')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

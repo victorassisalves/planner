@@ -11,6 +11,6 @@ export declare class TeamsService {
     }>;
     findAll(): string;
     findOne(teamName: string): Promise<FirebaseFirestore.DocumentData>;
-    update(id: number, updateTeamDto: UpdateTeamDto): string;
-    remove(id: number): string;
+    update(teamName: string, team: UpdateTeamDto): Promise<FirebaseFirestore.WriteResult>;
+    remove(teamName: string): Promise<FirebaseFirestore.WriteResult>;
 }

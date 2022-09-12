@@ -13,6 +13,6 @@ export declare class TeamsController {
     }>;
     findAll(): string;
     findOne(teamName: string): Promise<FirebaseFirestore.DocumentData>;
-    update(id: string, updateTeamDto: UpdateTeamDto): string;
-    remove(id: string): string;
+    update(teamName: string, updateTeamDto: UpdateTeamDto): Promise<FirebaseFirestore.WriteResult>;
+    remove(teamName: string): Promise<FirebaseFirestore.WriteResult>;
 }

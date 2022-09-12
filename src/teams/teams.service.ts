@@ -36,11 +36,26 @@ export class TeamsService {
     return res.data();
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async update(teamName: string, team: UpdateTeamDto) {
+    try {
+      const res = await this.teamRef.doc(teamName).update({
+        ...team,
+        lastUpdatedTime: FieldValue.serverTimestamp(),
+      });
+      return res;
+    } catch (error) {
+      console.log(error);
+      if (error.code == 5) {
+        throw new HttpException('Team Not Found', HttpStatus.NOT_FOUND);
+      }
+      throw new HttpException(`Error Updating Team. Details: ${error.details}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async remove(teamName: string) {
+    const res = await this.teamRef.doc(teamName).delete();
+    return res;
   }
 }

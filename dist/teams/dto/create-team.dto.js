@@ -18,13 +18,15 @@ const teams_service_1 = require("../teams.service");
 let IsTeamUniqueConstraint = class IsTeamUniqueConstraint {
     constructor(teamsService) {
         this.teamsService = teamsService;
-        this.soRef = main_1.db.collection('teams');
+        this.teamRef = main_1.db.collection('teams');
     }
     async validate(teamName, validationArguments) {
-        console.log(teamName);
-        const team = await this.teamsService.findOne(teamName);
-        console.log(team);
-        return !!!team;
+        const res = await this.teamRef.doc(teamName).get();
+        if (!res.data()) {
+            console.log('No matching teams.');
+            return true;
+        }
+        return false;
     }
 };
 IsTeamUniqueConstraint = __decorate([
@@ -50,9 +52,6 @@ class CreateTeamDto {
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    IsTeamUnique({
-        message: "teamName already exists. Please choose a unique one."
-    }),
     __metadata("design:type", String)
 ], CreateTeamDto.prototype, "teamName", void 0);
 exports.CreateTeamDto = CreateTeamDto;

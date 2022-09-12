@@ -13,12 +13,14 @@ import { TeamsService } from '../teams.service';
 export class IsTeamUniqueConstraint implements ValidatorConstraintInterface {
   constructor(private teamsService: TeamsService) { }
 
-  soRef = db.collection('teams');
+  teamRef = db.collection('teams');
   async validate(teamName: any, validationArguments?: ValidationArguments): Promise<boolean> {
-    console.log(teamName);
-    const team = await this.teamsService.findOne(teamName);
-    console.log(team);
-    return !!!team;
+    const res = await this.teamRef.doc(teamName).get();
+    if (!res.data()) {
+      console.log('No matching teams.');
+      return true;
+    }
+    return false;
   }
 }
 
@@ -37,9 +39,9 @@ export function IsTeamUnique(valitionOptions?: ValidationOptions) {
 export class CreateTeamDto {
   @IsNotEmpty()
   @IsString()
-  @IsTeamUnique({
-    message: "teamName already exists. Please choose a unique one."
-  })
+  // @IsTeamUnique({
+  //   message: "teamName already exists. Please choose a unique one."
+  // })
   teamName: string;
   leaderName: string;
   leaderId: string;

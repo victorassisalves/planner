@@ -32,11 +32,22 @@ let TeamsService = class TeamsService {
         }
         return res.data();
     }
-    update(id, updateTeamDto) {
-        return `This action updates a #${id} team`;
+    async update(teamName, team) {
+        try {
+            const res = await this.teamRef.doc(teamName).update(Object.assign(Object.assign({}, team), { lastUpdatedTime: firestore_1.FieldValue.serverTimestamp() }));
+            return res;
+        }
+        catch (error) {
+            console.log(error);
+            if (error.code == 5) {
+                throw new common_1.HttpException('Team Not Found', common_1.HttpStatus.NOT_FOUND);
+            }
+            throw new common_1.HttpException(`Error Updating Team. Details: ${error.details}`, common_1.HttpStatus.BAD_REQUEST);
+        }
     }
-    remove(id) {
-        return `This action removes a #${id} team`;
+    async remove(teamName) {
+        const res = await this.teamRef.doc(teamName).delete();
+        return res;
     }
 };
 TeamsService = __decorate([
