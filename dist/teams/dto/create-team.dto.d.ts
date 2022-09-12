@@ -8,8 +8,10 @@ export declare class IsTeamUniqueConstraint implements ValidatorConstraintInterf
 }
 export declare function IsTeamUnique(valitionOptions?: ValidationOptions): (object: object, propertyName: string) => void;
 export declare class CreateTeamDto {
+    email: string;
     teamName: string;
     leaderName: string;
     leaderId: string;
-    teamMembers: [];
+    department: string;
+    members: [];
 }

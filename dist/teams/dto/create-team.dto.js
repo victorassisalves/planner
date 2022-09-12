@@ -50,9 +50,20 @@ exports.IsTeamUnique = IsTeamUnique;
 class CreateTeamDto {
 }
 __decorate([
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], CreateTeamDto.prototype, "email", void 0);
+__decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    IsTeamUnique({
+        message: "teamName already exists. Please choose a unique one."
+    }),
     __metadata("design:type", String)
 ], CreateTeamDto.prototype, "teamName", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateTeamDto.prototype, "department", void 0);
 exports.CreateTeamDto = CreateTeamDto;
 //# sourceMappingURL=create-team.dto.js.map

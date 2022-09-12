@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IsDate, IsNotEmpty, IsNumberString, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsNotEmpty, IsNumberString, IsString } from 'class-validator';
 
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 import { db } from 'src/main';
@@ -37,13 +37,17 @@ export function IsTeamUnique(valitionOptions?: ValidationOptions) {
 }
 
 export class CreateTeamDto {
+  @IsEmail()
+  email: string;
   @IsNotEmpty()
   @IsString()
-  // @IsTeamUnique({
-  //   message: "teamName already exists. Please choose a unique one."
-  // })
+  @IsTeamUnique({
+    message: "teamName already exists. Please choose a unique one."
+  })
   teamName: string;
   leaderName: string;
   leaderId: string;
-  teamMembers: [];
+  @IsString()
+  department: string;
+  members: [];
 }
