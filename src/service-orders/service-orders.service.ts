@@ -22,7 +22,7 @@ export class ServiceOrdersService {
    */
   async create(so: CreateServiceOrderDto): Promise<any> {
     const newSo = this.docRef.doc();
-    await this.docRef.add({
+    await this.docRef.doc(newSo.id).set({
       ...so,
       id: newSo.id,
       createdTime: FieldValue.serverTimestamp(),

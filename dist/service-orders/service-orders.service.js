@@ -19,7 +19,7 @@ let ServiceOrdersService = class ServiceOrdersService {
     }
     async create(so) {
         const newSo = this.docRef.doc();
-        await this.docRef.add(Object.assign(Object.assign({}, so), { id: newSo.id, createdTime: firestore_1.FieldValue.serverTimestamp() }));
+        await this.docRef.doc(newSo.id).set(Object.assign(Object.assign({}, so), { id: newSo.id, createdTime: firestore_1.FieldValue.serverTimestamp() }));
         return Object.assign(Object.assign({}, so), { id: newSo.id });
     }
     async findAll() {

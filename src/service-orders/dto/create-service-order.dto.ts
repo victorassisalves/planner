@@ -9,11 +9,11 @@ export class CreateServiceOrderDto {
   @IsNotEmpty()
   serviceId: string;
   serviceName: string;
-  @IsNotEmpty()
+  // @IsNotEmpty()
   serviceOrderId: string;
-  @IsNumberString()
+  // @IsNumberString()
   year: number;
-  @IsDate()
+  // @IsDate()
   billingDate: Date;
   status: string;
   milestone: string;
